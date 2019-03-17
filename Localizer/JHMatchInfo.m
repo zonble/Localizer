@@ -29,13 +29,13 @@ NSString *const JHMatchInfoUTI = @"com.joehsieh.JHMatchInfo";
 
 @implementation JHMatchInfo
 
-- (void)dealloc
-{
-	self.key = nil;
-	self.translateString = nil;
-	self.comment = nil;
-	self.filePath = nil;
-}
+//- (void)dealloc
+//{
+//	self.key = nil;
+//	self.translateString = nil;
+//	self.comment = nil;
+//	self.filePath = nil;
+//}
 
 - (BOOL)isEqual:(id)object
 {

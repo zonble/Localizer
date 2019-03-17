@@ -100,10 +100,10 @@ static NSSet *parseFile(NSString *baseFilePath, NSString *extFilePath, NSError *
 		 ,     key 和 comment 之間要有一個分隔符號 ,
 		 */
 		NSArray *patterns = @[@"NSLocalizedString\\s*\\(\\s*@\"(.*?)\"\\s*,\\s*@?\"?(.*?)\"?\\s*\\)",
-		                      @"NSLocalizedString\\s*\\(\\s*\"(.*?)\"\\s*,\\s*commemt:\\s*@?\"?(.*?)\"?\\s*\\)",
-		                      @"LFLSTR\\s*\\(\\s*@\"(.*?)\"\\s*\\)",
-		                      @"LFLSTR\\s*\\(\\s*\"(.*?)\"\\s*\\)",
-		                      @"\\^(.*?)<"];
+							  @"NSLocalizedString\\s*\\(\\s*\"(.*?)\"\\s*,\\s*commemt:\\s*@?\"?(.*?)\"?\\s*\\)",
+							  @"LFLSTR\\s*\\(\\s*@\"(.*?)\"\\s*\\)",
+							  @"LFLSTR\\s*\\(\\s*\"(.*?)\"\\s*\\)",
+							  @"\\^(.*?)<"];
 		for (NSString *pattern in patterns) {
 			[result unionSet:makeMatchInfoSet(pattern, fileContent, extFilePath)];
 		}
