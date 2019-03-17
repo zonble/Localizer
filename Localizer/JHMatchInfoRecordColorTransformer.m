@@ -44,11 +44,11 @@
 
     switch (state) {
         case unTranslated:
-            return [NSColor blueColor];
+			return [NSColor systemBlueColor];
         case notExist:
-            return [NSColor redColor];
+            return [NSColor systemRedColor];
         case translated:
-            return [NSColor blackColor];
+            return [NSColor controlTextColor];
         default:
             break;
     }
@@ -57,13 +57,13 @@
 
 - (id)reverseTransformedValue:(id)value
 {
-    if (value == [NSColor blueColor]) {
+    if (value == [NSColor systemBlueColor]) {
         return @(unTranslated);
     }
-    else if(value == [NSColor redColor]) {
+    else if(value == [NSColor systemRedColor]) {
         return @(notExist);
     }
-    else if(value == [NSColor blackColor]) {
+    else if(value == [NSColor controlTextColor]) {
         return @(translated);
     }
     return nil;
