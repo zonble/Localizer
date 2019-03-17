@@ -11,6 +11,7 @@
 @interface NSString (RelativePath)
 
 - (NSString *)absolutePathFromBaseDirPath:(NSString *)baseDirPath;
+
 - (NSString *)relativePathFromBaseDirPath:(NSString *)baseDirPath;
 
 @end

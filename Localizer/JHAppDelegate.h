@@ -25,8 +25,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface JHAppDelegate : NSObject  <NSApplicationDelegate>
+@interface JHAppDelegate : NSObject <NSApplicationDelegate>
 
 - (IBAction)openHomepage:(id)sender;
+
 - (IBAction)reportIssue:(id)sender;
 @end

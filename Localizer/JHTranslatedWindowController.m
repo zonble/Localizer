@@ -4,26 +4,26 @@
 
 - (void)dealloc
 {
-    self.translatedView = nil;
-    self.translatedWindowControllerDelegate = nil;
+	self.translatedView = nil;
+	self.translatedWindowControllerDelegate = nil;
 }
 
 - (void)awakeFromNib
 {
-    [[self window] setDefaultButtonCell:[self.mergeButton cell]];
+	[[self window] setDefaultButtonCell:[self.mergeButton cell]];
 }
 
 - (IBAction)mergeTranslatedString:(id)sender
 {
-    if (self.translatedWindowControllerDelegate && [self.translatedWindowControllerDelegate respondsToSelector:@selector(windowController:didMerge:)]) {
-        [self.translatedWindowControllerDelegate windowController:self didMerge:nil];
-    }
+	if (self.translatedWindowControllerDelegate && [self.translatedWindowControllerDelegate respondsToSelector:@selector(windowController:didMerge:)]) {
+		[self.translatedWindowControllerDelegate windowController:self didMerge:nil];
+	}
 }
 
 - (IBAction)close:(id)sender
 {
-    [NSApp endSheet:self.window];
-    [self.window orderOut:self];
+	[NSApp endSheet:self.window];
+	[self.window orderOut:self];
 }
 
 @end

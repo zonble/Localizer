@@ -30,23 +30,23 @@
 
 - (NSArray *)mergeSetWithSrcInfoSet:(NSSet *)inSrcInfoSet withLocalizableInfoSet:(NSSet *)inLocalizableInfoSet withLocalizableFileExist:(BOOL)isLocalizableFileExist
 {
-    NSArray *result = nil;
-    //同時有 localizable.strings 檔和 src 則 merge 兩者資料後回傳
-    if (isLocalizableFileExist) {
-        NSMutableArray *combinedResult = [NSMutableArray array];
-        NSArray *addedSortedArray = [self getAddedSortedArray:inSrcInfoSet localizableInfoSet:inLocalizableInfoSet];
-        NSArray *intersectArray = [self getIntersectArray:inSrcInfoSet localizableInfoSet:inLocalizableInfoSet];
-        NSArray *noExistArray = [self getNoExistArray:inSrcInfoSet localizableInfoSet:inLocalizableInfoSet];
-        [combinedResult addObjectsFromArray:addedSortedArray];
-        [combinedResult addObjectsFromArray:intersectArray];
-        [combinedResult addObjectsFromArray:noExistArray];
+	NSArray *result = nil;
+	//同時有 localizable.strings 檔和 src 則 merge 兩者資料後回傳
+	if (isLocalizableFileExist) {
+		NSMutableArray *combinedResult = [NSMutableArray array];
+		NSArray *addedSortedArray = [self getAddedSortedArray:inSrcInfoSet localizableInfoSet:inLocalizableInfoSet];
+		NSArray *intersectArray = [self getIntersectArray:inSrcInfoSet localizableInfoSet:inLocalizableInfoSet];
+		NSArray *noExistArray = [self getNoExistArray:inSrcInfoSet localizableInfoSet:inLocalizableInfoSet];
+		[combinedResult addObjectsFromArray:addedSortedArray];
+		[combinedResult addObjectsFromArray:intersectArray];
+		[combinedResult addObjectsFromArray:noExistArray];
 
-        result = combinedResult;
-    }
-    else {
-        result = [inSrcInfoSet allObjects];
-    }
-    return result;
+		result = combinedResult;
+	}
+	else {
+		result = [inSrcInfoSet allObjects];
+	}
+	return result;
 }
 
 #pragma mark -  set operation
@@ -57,13 +57,13 @@
  */
 - (NSArray *)getAddedSortedArray:(NSSet *)inSrcInfoSet localizableInfoSet:(NSSet *)inLocalizableInfoSet
 {
-    NSMutableSet *mutableSrcInfoSet = [NSMutableSet setWithSet:inSrcInfoSet];
-    [mutableSrcInfoSet minusSet:inLocalizableInfoSet];
-    [mutableSrcInfoSet enumerateObjectsUsingBlock:^(JHMatchInfo *obj, BOOL *stop) {
-        obj.state = unTranslated;
-    }];
+	NSMutableSet *mutableSrcInfoSet = [NSMutableSet setWithSet:inSrcInfoSet];
+	[mutableSrcInfoSet minusSet:inLocalizableInfoSet];
+	[mutableSrcInfoSet enumerateObjectsUsingBlock:^(JHMatchInfo *obj, BOOL *stop) {
+		obj.state = unTranslated;
+	}];
 
-    return [mutableSrcInfoSet allObjects];
+	return [mutableSrcInfoSet allObjects];
 }
 
 /*
@@ -73,22 +73,22 @@
  */
 - (NSArray *)getIntersectArray:(NSSet *)inSrcInfoSet localizableInfoSet:(NSSet *)inLocalizableInfoSet
 {
-    NSMutableArray *result = [NSMutableArray array];
+	NSMutableArray *result = [NSMutableArray array];
 
-    NSArray *srcInfoArray = [NSArray arrayWithArray:[inSrcInfoSet allObjects]];
-    NSArray *localizableInfoArray = [NSArray arrayWithArray:[inLocalizableInfoSet allObjects]];
-    for (JHMatchInfo *localizableInfoRecord in localizableInfoArray) {
-        for (JHMatchInfo *srcInfoRecord in srcInfoArray) {
-            if ([localizableInfoRecord.key isEqualToString:srcInfoRecord.key]) {
-                if (![localizableInfoRecord.filePath isEqualToString:srcInfoRecord.filePath]) {
-                    //更新localizable.strings 中 matchInfo record 中的 file path
-                    localizableInfoRecord.filePath = srcInfoRecord.filePath;
-                }
-                [result addObject:localizableInfoRecord];
-            }
-        }
-    }
-    return result;
+	NSArray *srcInfoArray = [NSArray arrayWithArray:[inSrcInfoSet allObjects]];
+	NSArray *localizableInfoArray = [NSArray arrayWithArray:[inLocalizableInfoSet allObjects]];
+	for (JHMatchInfo *localizableInfoRecord in localizableInfoArray) {
+		for (JHMatchInfo *srcInfoRecord in srcInfoArray) {
+			if ([localizableInfoRecord.key isEqualToString:srcInfoRecord.key]) {
+				if (![localizableInfoRecord.filePath isEqualToString:srcInfoRecord.filePath]) {
+					//更新localizable.strings 中 matchInfo record 中的 file path
+					localizableInfoRecord.filePath = srcInfoRecord.filePath;
+				}
+				[result addObject:localizableInfoRecord];
+			}
+		}
+	}
+	return result;
 }
 
 /*
@@ -97,25 +97,25 @@
  */
 - (NSArray *)getNoExistArray:(NSSet *)inSrcInfoSet localizableInfoSet:(NSSet *)inLocalizableInfoSet
 {
-    NSMutableArray *result = [NSMutableArray array];
+	NSMutableArray *result = [NSMutableArray array];
 
-    NSArray *srcInfoArray = [NSArray arrayWithArray:[inSrcInfoSet allObjects]];
-    NSArray *localizableInfoArray = [NSArray arrayWithArray:[inLocalizableInfoSet allObjects]];
-    for (JHMatchInfo *localizableInfoRecord in localizableInfoArray) {
-        BOOL isExist = NO;
-        for (JHMatchInfo *srcInfoRecord in srcInfoArray) {
-            if ([localizableInfoRecord.key isEqualToString:srcInfoRecord.key]) {
-                isExist = YES;
-                break;
-            }
-        }
-        if (!isExist) {
-            localizableInfoRecord.state = notExist;
-            localizableInfoRecord.filePath = @"Not exist";
-            [result addObject:localizableInfoRecord];
-        }
-    }
-    return result;
+	NSArray *srcInfoArray = [NSArray arrayWithArray:[inSrcInfoSet allObjects]];
+	NSArray *localizableInfoArray = [NSArray arrayWithArray:[inLocalizableInfoSet allObjects]];
+	for (JHMatchInfo *localizableInfoRecord in localizableInfoArray) {
+		BOOL isExist = NO;
+		for (JHMatchInfo *srcInfoRecord in srcInfoArray) {
+			if ([localizableInfoRecord.key isEqualToString:srcInfoRecord.key]) {
+				isExist = YES;
+				break;
+			}
+		}
+		if (!isExist) {
+			localizableInfoRecord.state = notExist;
+			localizableInfoRecord.filePath = @"Not exist";
+			[result addObject:localizableInfoRecord];
+		}
+	}
+	return result;
 }
 
 @end

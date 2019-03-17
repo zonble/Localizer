@@ -32,20 +32,13 @@
 // An abstract document which represents a "Localizable.strings" file.
 
 @interface JHDocument : NSDocument <NSToolbarDelegate>
-{
-//	IBOutlet JHFilePathTableViewController *__weak filePathTableViewController;
-//	IBOutlet JHMatchInfoTableViewController *__weak matchInfoTableViewController;
-//	IBOutlet NSSegmentedControl *__weak segmentedControl;
-//	IBOutlet NSSearchField *__weak searchField;
-//
-//	JHMatchInfoProcessor *matchInfoProcessor;
-//	NSArray *scanArray;
-//	NSSet *localizableInfoSet;
-}
 
 - (IBAction)addScanFolderAndFiles:(id)sender;
+
 - (IBAction)scan:(id)sender;
+
 - (IBAction)translate:(id)sender;
+
 - (IBAction)filterWithSearchType:(id)sender;
 
 @property (weak, nonatomic) IBOutlet JHFilePathTableViewController *filePathTableViewController;

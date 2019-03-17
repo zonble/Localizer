@@ -30,21 +30,21 @@
 
 - (IBAction)showPreference:(id)sender
 {
-    if (!self.window) {
-        [NSBundle loadNibNamed:@"JHPreference" owner:self];
-        self.message.stringValue = NSLocalizedString(@"Fill translate string automatically.", @"");
-        self.subMessage.stringValue = NSLocalizedString(@"localizer will fill untranslate string with key automatically.", @"");
-    }
-    if (![self.window isVisible]) {
-        [self.window center];
-    }
-    [self.window makeKeyAndOrderFront:sender];
+	if (!self.window) {
+		[NSBundle loadNibNamed:@"JHPreference" owner:self];
+		self.message.stringValue = NSLocalizedString(@"Fill translate string automatically.", @"");
+		self.subMessage.stringValue = NSLocalizedString(@"localizer will fill untranslate string with key automatically.", @"");
+	}
+	if (![self.window isVisible]) {
+		[self.window center];
+	}
+	[self.window makeKeyAndOrderFront:sender];
 }
 
 - (IBAction)clickCheckbox:(id)sender
 {
-    [[NSUserDefaults standardUserDefaults] setBool:(BOOL)[sender state] forKey:JHAutoFillTranslationPreferenceKey];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+	[[NSUserDefaults standardUserDefaults] setBool:(BOOL)[sender state] forKey:JHAutoFillTranslationPreferenceKey];
+	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 @end

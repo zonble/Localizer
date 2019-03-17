@@ -29,76 +29,76 @@
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
-    self = [super initWithCoder:aDecoder];
+	self = [super initWithCoder:aDecoder];
 
-    if (self) {
-        NSArray *headerNameArray = @[
-            NSLocalizedString(@"key", @""),
-            NSLocalizedString(@"translate string", @""),
-            NSLocalizedString(@"comment", @""),
-            NSLocalizedString(@"from", @"")
-        ];
+	if (self) {
+		NSArray *headerNameArray = @[
+				NSLocalizedString(@"key", @""),
+				NSLocalizedString(@"translate string", @""),
+				NSLocalizedString(@"comment", @""),
+				NSLocalizedString(@"from", @"")
+		];
 
-        //設定可以多選
-        [self setAllowsMultipleSelection: YES];
+		//設定可以多選
+		[self setAllowsMultipleSelection:YES];
 
-        for (int i = 0; i < [self.tableColumns count] ; i++) {
-            [(self.tableColumns)[i] setHeaderCell:[[NSTableHeaderCell alloc] initTextCell:headerNameArray[i]] ];
-        }
-    }
-    return self;
+		for (int i = 0; i < [self.tableColumns count]; i++) {
+			[(self.tableColumns)[i] setHeaderCell:[[NSTableHeaderCell alloc] initTextCell:headerNameArray[i]]];
+		}
+	}
+	return self;
 }
 
 - (IBAction)delete:(id)sender
 {
-    id <NSTableViewDelegateMatchInfoExtension> delegate = (id <NSTableViewDelegateMatchInfoExtension>)[self delegate];
-    if ([delegate respondsToSelector:@selector(tableView:didDeleteMatchInfos:)]) {
-        [delegate tableView:self didDeleteMatchInfos:nil];
-    }
+	id <NSTableViewDelegateMatchInfoExtension> delegate = (id <NSTableViewDelegateMatchInfoExtension>)[self delegate];
+	if ([delegate respondsToSelector:@selector(tableView:didDeleteMatchInfos:)]) {
+		[delegate tableView:self didDeleteMatchInfos:nil];
+	}
 }
 
 - (IBAction)copy:(id)sender
 {
-    id <NSTableViewDelegateMatchInfoExtension> delegate = (id <NSTableViewDelegateMatchInfoExtension>)[self delegate];
-    if ([delegate respondsToSelector:@selector(tableView:didCopiedMatchInfosWithIndexes:)]) {
-        [delegate tableView:self didCopiedMatchInfosWithIndexes:[self selectedRowIndexes]];
-    }
+	id <NSTableViewDelegateMatchInfoExtension> delegate = (id <NSTableViewDelegateMatchInfoExtension>)[self delegate];
+	if ([delegate respondsToSelector:@selector(tableView:didCopiedMatchInfosWithIndexes:)]) {
+		[delegate tableView:self didCopiedMatchInfosWithIndexes:[self selectedRowIndexes]];
+	}
 }
 
 - (IBAction)paste:(id)sender
 {
-    id <NSTableViewDelegateMatchInfoExtension> delegate = (id <NSTableViewDelegateMatchInfoExtension>)[self delegate];
-    if ([delegate respondsToSelector:@selector(tableView:didPasteMatchInfosWithIndexes:)]) {
-        [delegate tableView:self didPasteMatchInfosWithIndexes:[self selectedRowIndexes]];
-    }
+	id <NSTableViewDelegateMatchInfoExtension> delegate = (id <NSTableViewDelegateMatchInfoExtension>)[self delegate];
+	if ([delegate respondsToSelector:@selector(tableView:didPasteMatchInfosWithIndexes:)]) {
+		[delegate tableView:self didPasteMatchInfosWithIndexes:[self selectedRowIndexes]];
+	}
 }
 
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
-    SEL action = [menuItem action];
-    if (action == @selector(delete:)) {
-        if (![[self selectedRowIndexes] count]) {
-            return NO;
-        }
-        return YES;
-    }
-    else if (action == @selector(copy:)){
-        return YES;
-    }
-    else if (action == @selector(paste:)){
-        return YES;
-    }
+	SEL action = [menuItem action];
+	if (action == @selector(delete:)) {
+		if (![[self selectedRowIndexes] count]) {
+			return NO;
+		}
+		return YES;
+	}
+	else if (action == @selector(copy:)) {
+		return YES;
+	}
+	else if (action == @selector(paste:)) {
+		return YES;
+	}
 
-    return NO;
+	return NO;
 }
 
 - (NSMenu *)menu
 {
-    NSMenu *menu = [[NSMenu alloc] initWithTitle:NSLocalizedString(@"Context Menu", @"")] ;
-    [menu addItemWithTitle:NSLocalizedString(@"Delete", @"") action:@selector(delete:) keyEquivalent:@""];
-    [menu addItemWithTitle:NSLocalizedString(@"Copy", @"") action:@selector(copy:) keyEquivalent:@""];
-    [menu addItemWithTitle:NSLocalizedString(@"Paste", @"") action:@selector(paste:) keyEquivalent:@""];
-    return menu;
+	NSMenu *menu = [[NSMenu alloc] initWithTitle:NSLocalizedString(@"Context Menu", @"")];
+	[menu addItemWithTitle:NSLocalizedString(@"Delete", @"") action:@selector(delete:) keyEquivalent:@""];
+	[menu addItemWithTitle:NSLocalizedString(@"Copy", @"") action:@selector(copy:) keyEquivalent:@""];
+	[menu addItemWithTitle:NSLocalizedString(@"Paste", @"") action:@selector(paste:) keyEquivalent:@""];
+	return menu;
 }
 
 @end

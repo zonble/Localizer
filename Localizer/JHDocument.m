@@ -25,14 +25,11 @@
 
 #import "JHDocument.h"
 
-#import "JHFilePathTableViewController.h"
-#import "JHMatchInfoTableViewController.h"
 #import "JHSourceCodeParser.h"
 #import "JHLocalizableSettingParser.h"
 #import "JHMatchInfo.h"
-#import "NSString+RelativePath.h"
 
-@interface JHDocument() <JHTranslatedWindowControllerDelegate>
+@interface JHDocument () <JHTranslatedWindowControllerDelegate>
 @end
 
 @implementation JHDocument
@@ -57,7 +54,7 @@
 	return self;
 }
 
-#pragma mark -	override NSDocument
+#pragma mark -    override NSDocument
 
 // We need to capture the path that we will write data to here. Due to
 // the sandboxing design of Mac OS X 10.7 and later, the file URL
@@ -120,8 +117,8 @@
 	[super windowControllerDidLoadNib:windowController];
 
 	//將 undo manager 傳入 controller 讓 controller 可以自行 undo/redo
-	[self.matchInfoTableViewController setUndoManager:[self undoManager]];
-	[self.filePathTableViewController setUndoManager:[self undoManager]];
+	self.matchInfoTableViewController.undoManager = [self undoManager];
+	self.filePathTableViewController.undoManager = [self undoManager];
 
 	//載入 matchInfoTable 中的資料
 	[self.matchInfoTableViewController reloadMatchInfoRecords:[self.localizableInfoSet allObjects]];
@@ -141,16 +138,16 @@
 {
 }
 
-#pragma mark -	button action
+#pragma mark -    button action
 
 //加入檔案路徑的 action
 - (IBAction)addScanFolderAndFiles:(id)sender
 {
-	NSOpenPanel* openPanel = [NSOpenPanel openPanel];
-	[openPanel setCanChooseFiles:YES];
-	[openPanel setCanChooseDirectories:YES];
-	[openPanel setAllowsMultipleSelection:YES];
-	[openPanel setAllowedFileTypes:@[@"h", @"m",@"mm"]];
+	NSOpenPanel *openPanel = [NSOpenPanel openPanel];
+	openPanel.canChooseFiles = YES;
+	openPanel.canChooseDirectories = YES;
+	openPanel.allowsMultipleSelection = YES;
+	openPanel.allowedFileTypes = @[@"h", @"m", @"mm"];
 
 	NSWindow *window = [[self windowControllers][0] window];
 	[openPanel beginSheetModalForWindow:window completionHandler:^(NSInteger result) {
@@ -177,17 +174,17 @@
 
 	JHSourceCodeParser *sourceCodeParser = [[JHSourceCodeParser alloc] init];
 	for (NSURL *filePath in filePathArray) {
-		[sourceCodeInfoSet unionSet: [sourceCodeParser parse:[filePath path]]];
+		[sourceCodeInfoSet unionSet:[sourceCodeParser parse:[filePath path]]];
 	}
 
 	NSArray *addedResult = [self.matchInfoProcessor getAddedSortedArray:sourceCodeInfoSet localizableInfoSet:self.localizableInfoSet];
-	if([addedResult count] && [addedResult count] < 10){
+	if ([addedResult count] && [addedResult count] < 10) {
 		NSMutableString *message = [NSMutableString string];
-		[message appendFormat:NSLocalizedString(@"After this scan, we have added %d new key\n\n", @""),[addedResult count]];
+		[message appendFormat:NSLocalizedString(@"After this scan, we have added %d new key\n\n", @""), [addedResult count]];
 		int count = 0;
-		for (JHMatchInfo *addedMatchInfo in addedResult){
-			count ++;
-			[message appendFormat:@"%d. %@\n\n",count, addedMatchInfo.key];
+		for (JHMatchInfo *addedMatchInfo in addedResult) {
+			count++;
+			[message appendFormat:@"%d. %@\n\n", count, addedMatchInfo.key];
 		}
 		NSAlert *alert = [NSAlert alertWithMessageText:message defaultButton:NSLocalizedString(@"OK", @"") alternateButton:nil otherButton:nil informativeTextWithFormat:@""];
 		NSWindow *window = [[self windowControllers][0] window];
@@ -202,7 +199,7 @@
 
 - (IBAction)translate:(id)sender
 {
-	if(!self.translatedWindowController){
+	if (!self.translatedWindowController) {
 		self.translatedWindowController = [[JHTranslatedWindowController alloc] initWithWindowNibName:@"JHTranslatedWindow"];
 		self.translatedWindowController.translatedWindowControllerDelegate = self;
 		[self addWindowController:self.translatedWindowController];
@@ -235,21 +232,18 @@
 		return YES;
 	}
 	else if (action == @selector(scan:)) {
-		return !![[self filePathTableViewController].filePathArray count];
+		return self.filePathTableViewController.filePathArray.count != 0;
 	}
 	else if (action == @selector(translate:)) {
 		return YES;
 	}
 	else if (action == @selector(filterWithSearchType:)) {
 		NSInteger tag = [menuItem tag];
-		[menuItem setState:(self.segmentedControl.selectedSegment == tag) ? NSOnState : NSOffState];
+		menuItem.state = (self.segmentedControl.selectedSegment == tag) ? NSOnState : NSOffState;
 		return YES;
 	}
 	else if (action == @selector(performFindPanelAction:)) {
-		if ([menuItem tag] == 1) {
-			return YES;
-		}
-		return NO;
+		return menuItem.tag == 1;
 	}
 	return [super validateMenuItem:menuItem];
 }
@@ -261,7 +255,7 @@
 		return YES;
 	}
 	else if (action == @selector(scan:)) {
-		return !![[self filePathTableViewController].filePathArray count];
+		return self.filePathTableViewController.filePathArray.count != 0;
 	}
 	else if (action == @selector(translate:)) {
 		return YES;
@@ -281,9 +275,9 @@
 {
 	NSUndoManager *undoManager = [self undoManager];
 	NSString *inActionName = NSLocalizedString(@"Translate", @"");
-	[[undoManager prepareWithInvocationTarget:self.matchInfoTableViewController] restoreMatchinfoArray:[[self.matchInfoTableViewController.arrayController content]copy]	 actionName:inActionName];
+	[[undoManager prepareWithInvocationTarget:self.matchInfoTableViewController] restoreMatchinfoArray:[[self.matchInfoTableViewController.arrayController content] copy] actionName:inActionName];
 	if (!undoManager.isUndoing) {
-		[undoManager setActionName:NSLocalizedString(inActionName, @"")];
+		undoManager.actionName = NSLocalizedString(inActionName, @"");
 	}
 	NSString *translatedContent = [NSString stringWithFormat:@"/* Not exist */ \n %@", inWindowController.translatedView.textStorage.string];
 
@@ -301,27 +295,27 @@
 		NSMutableArray *result = [NSMutableArray arrayWithArray:[self.localizableInfoSet allObjects]];
 
 		[translatedMatchRecordSet enumerateObjectsUsingBlock:^(JHMatchInfo *obj, BOOL *stop) {
-				//matchInfo 是以 key 為比對方式，key 相同就存在，在除了 key 以外的資訊有可能不同，所以採用 replace 的方式置換
-				if ([self.localizableInfoSet containsObject:obj]) {
-					NSUInteger index = [result indexOfObject:obj];
+			//matchInfo 是以 key 為比對方式，key 相同就存在，在除了 key 以外的資訊有可能不同，所以採用 replace 的方式置換
+			if ([self.localizableInfoSet containsObject:obj]) {
+				NSUInteger index = [result indexOfObject:obj];
 
-					JHMatchInfo *matchInfo = result[index];
-					obj.filePath = matchInfo.filePath;
+				JHMatchInfo *matchInfo = result[index];
+				obj.filePath = matchInfo.filePath;
 
-					if ([obj.key isEqualToString:obj.translateString]) {
-						obj.state = unTranslated;
-					}
-
-					if ([obj.filePath isEqualToString:@"Not exist"]) {
-						obj.state = notExist;
-					}
-					result[index] = obj;
+				if ([obj.key isEqualToString:obj.translateString]) {
+					obj.state = unTranslated;
 				}
-				else {
+
+				if ([obj.filePath isEqualToString:@"Not exist"]) {
 					obj.state = notExist;
-					[result addObject:obj];
 				}
-			}];
+				result[index] = obj;
+			}
+			else {
+				obj.state = notExist;
+				[result addObject:obj];
+			}
+		}];
 		[self.matchInfoTableViewController reloadMatchInfoRecords:result];
 	}
 }

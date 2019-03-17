@@ -26,14 +26,6 @@
 #import <Foundation/Foundation.h>
 
 @interface JHFilePathTableViewController : NSViewController <NSTableViewDelegate, NSTableViewDataSource>
-//{
-//    NSMutableArray *filePathArray;
-//
-//    //to be stored in localizable file
-//    NSArray *relativeFilePathArray;
-//
-//    NSUndoManager *undoManager;
-//}
 
 //增加原始碼路徑，動作完後會直接更新 table 上的資料
 - (void)addFilePaths:(NSArray *)inArray;

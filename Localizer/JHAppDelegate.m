@@ -35,20 +35,21 @@
 	JHMatchInfoRecordColorTransformer *transformer = [[JHMatchInfoRecordColorTransformer alloc] init];
 	[NSValueTransformer setValueTransformer:transformer forName:@"JHMatchInfoRecordColorTransformer"];
 
-	if (![[NSUserDefaults standardUserDefaults] objectForKey:JHAutoFillTranslationPreferenceKey]) {
-		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:JHAutoFillTranslationPreferenceKey];
+	if (![NSUserDefaults.standardUserDefaults objectForKey:JHAutoFillTranslationPreferenceKey]) {
+		[NSUserDefaults.standardUserDefaults setBool:YES forKey:JHAutoFillTranslationPreferenceKey];
 	}
 }
 
 - (IBAction)openHomepage:(id)sender
 {
 	NSURL *URL = [NSURL URLWithString:@"https://github.com/ninja31312/Localizer"];
-	[[NSWorkspace sharedWorkspace] openURL:URL];
+	[NSWorkspace.sharedWorkspace openURL:URL];
 }
+
 - (IBAction)reportIssue:(id)sender
 {
 	NSURL *URL = [NSURL URLWithString:@"https://github.com/ninja31312/Localizer/issues"];
-	[[NSWorkspace sharedWorkspace] openURL:URL];
+	[NSWorkspace.sharedWorkspace openURL:URL];
 }
 
 

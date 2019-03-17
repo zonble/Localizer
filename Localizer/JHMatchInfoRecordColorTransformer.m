@@ -30,42 +30,42 @@
 
 + (Class)transformedValueClass
 {
-    return [NSColor class];
+	return [NSColor class];
 }
 
 + (BOOL)allowsReverseTransformation
 {
-    return YES;
+	return YES;
 }
 
 - (id)transformedValue:(id)value
 {
-    NSInteger state = [value integerValue];
+	NSInteger state = [value integerValue];
 
-    switch (state) {
-        case unTranslated:
+	switch (state) {
+		case unTranslated:
 			return [NSColor systemBlueColor];
-        case notExist:
-            return [NSColor systemRedColor];
-        case translated:
-            return [NSColor controlTextColor];
-        default:
-            break;
-    }
-    return nil;
+		case notExist:
+			return [NSColor systemRedColor];
+		case translated:
+			return [NSColor controlTextColor];
+		default:
+			break;
+	}
+	return nil;
 }
 
 - (id)reverseTransformedValue:(id)value
 {
-    if (value == [NSColor systemBlueColor]) {
-        return @(unTranslated);
-    }
-    else if(value == [NSColor systemRedColor]) {
-        return @(notExist);
-    }
-    else if(value == [NSColor controlTextColor]) {
-        return @(translated);
-    }
-    return nil;
+	if (value == [NSColor systemBlueColor]) {
+		return @(unTranslated);
+	}
+	else if (value == [NSColor systemRedColor]) {
+		return @(notExist);
+	}
+	else if (value == [NSColor controlTextColor]) {
+		return @(translated);
+	}
+	return nil;
 }
 @end
