@@ -33,7 +33,6 @@
     self.window = nil;
     self.message = nil;
     self.subMessage = nil;
-    [super dealloc];
 }
 
 - (IBAction)showPreference:(id)sender

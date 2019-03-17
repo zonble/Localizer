@@ -27,15 +27,15 @@
 
 @interface JHPreferenceController : NSObject
 {
-    IBOutlet NSWindow *window;
-    IBOutlet NSTextField *message;
-    IBOutlet NSTextField *subMessage;
+    IBOutlet NSWindow *__weak window;
+    IBOutlet NSTextField *__weak message;
+    IBOutlet NSTextField *__weak subMessage;
 }
 
 - (IBAction)showPreference:(id)sender;
 - (IBAction)clickCheckbox:(id)sender;
 
-@property (assign, nonatomic) IBOutlet NSWindow *window;
-@property (assign, nonatomic) IBOutlet NSTextField *message;
-@property (assign, nonatomic) IBOutlet NSTextField *subMessage;
+@property (weak, nonatomic) IBOutlet NSWindow *window;
+@property (weak, nonatomic) IBOutlet NSTextField *message;
+@property (weak, nonatomic) IBOutlet NSTextField *subMessage;
 @end

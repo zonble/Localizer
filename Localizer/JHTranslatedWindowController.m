@@ -6,7 +6,6 @@
 {
     self.translatedView = nil;
     self.translatedWindowControllerDelegate = nil;
-    [super dealloc];
 }
 
 - (void)awakeFromNib

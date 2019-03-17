@@ -8,20 +8,20 @@
 
 @interface JHTranslatedWindowController : NSWindowController
 {
-    IBOutlet NSTextView *translatedView;
-    IBOutlet NSButton *mergeButton;
-    IBOutlet NSButton *closeButton;
+    IBOutlet NSTextView *__unsafe_unretained translatedView;
+    IBOutlet NSButton *__weak mergeButton;
+    IBOutlet NSButton *__weak closeButton;
 
-    id <JHTranslatedWindowControllerDelegate> translatedWindowControllerDelegate;
+    id <JHTranslatedWindowControllerDelegate> __unsafe_unretained translatedWindowControllerDelegate;
 }
 
 - (IBAction)mergeTranslatedString:(id)sender;
 - (IBAction)close:(id)sender;
 
-@property (assign, nonatomic) IBOutlet NSTextView *translatedView;
-@property (assign, nonatomic) IBOutlet NSButton *mergeButton;
-@property (assign, nonatomic) IBOutlet NSButton *closeButton;
+@property (unsafe_unretained, nonatomic) IBOutlet NSTextView *translatedView;
+@property (weak, nonatomic) IBOutlet NSButton *mergeButton;
+@property (weak, nonatomic) IBOutlet NSButton *closeButton;
 
-@property (assign, nonatomic) id<JHTranslatedWindowControllerDelegate> translatedWindowControllerDelegate;
+@property (unsafe_unretained, nonatomic) id<JHTranslatedWindowControllerDelegate> translatedWindowControllerDelegate;
 
 @end

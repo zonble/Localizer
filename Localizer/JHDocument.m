@@ -46,10 +46,6 @@
 {
 	self.filePathTableViewController = nil;
 	self.matchInfoTableViewController = nil;
-	self.matchInfoProcessor = nil;
-	self.localizableInfoSet = nil;
-	self.translatedWindowController = nil;
-	[super dealloc];
 }
 
 - (instancetype)init
@@ -97,7 +93,7 @@
 // Read data from "Localizable.string.
 - (BOOL)readFromData:(NSData *)data ofType:(NSString *)typeName error:(NSError **)outError
 {
-	NSString *localizableFileContent = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
+	NSString *localizableFileContent = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 	if (!localizableFileContent) {
 		if (outError) {
 			*outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadUnknownError userInfo:nil];
@@ -106,7 +102,7 @@
 	}
 	if (localizableFileContent) {
 		// get localizable related info from Localizable.strings
-		JHLocalizableSettingParser *localizableSettingParser = [[[JHLocalizableSettingParser alloc] init] autorelease];
+		JHLocalizableSettingParser *localizableSettingParser = [[JHLocalizableSettingParser alloc] init];
 
 		NSArray *tempScanArray = nil;
 		NSSet *tempMatchRecordSet = nil;
@@ -183,7 +179,6 @@
 	for (NSURL *filePath in filePathArray) {
 		[sourceCodeInfoSet unionSet: [sourceCodeParser parse:[filePath path]]];
 	}
-	[sourceCodeParser release];
 
 	NSArray *addedResult = [matchInfoProcessor getAddedSortedArray:sourceCodeInfoSet localizableInfoSet:localizableInfoSet];
 	if([addedResult count] && [addedResult count] < 10){
@@ -208,7 +203,7 @@
 - (IBAction)translate:(id)sender
 {
 	if(!translatedWindowController){
-		translatedWindowController = [[[JHTranslatedWindowController alloc] initWithWindowNibName:@"JHTranslatedWindow"] autorelease];
+		translatedWindowController = [[JHTranslatedWindowController alloc] initWithWindowNibName:@"JHTranslatedWindow"];
 		translatedWindowController.translatedWindowControllerDelegate = self;
 		[self addWindowController:translatedWindowController];
 	}
@@ -281,15 +276,14 @@
 	NSArray *updatedLocalizableInfoArray = [NSArray arrayWithArray:matchInfoTableViewController.matchInfoArray];
 
 	NSSet *temp = localizableInfoSet;
-	localizableInfoSet = [[NSSet setWithArray:updatedLocalizableInfoArray] retain];
-	[temp release];
+	localizableInfoSet = [NSSet setWithArray:updatedLocalizableInfoArray];
 }
 
 - (void)windowController:(JHTranslatedWindowController *)inWindowController didMerge:(id)inSomething;
 {
 	NSUndoManager *undoManager = [self undoManager];
 	NSString *inActionName = NSLocalizedString(@"Translate", @"");
-	[[undoManager prepareWithInvocationTarget:matchInfoTableViewController] restoreMatchinfoArray:[[[matchInfoTableViewController.arrayController content]copy]autorelease]	 actionName:inActionName];
+	[[undoManager prepareWithInvocationTarget:matchInfoTableViewController] restoreMatchinfoArray:[[matchInfoTableViewController.arrayController content]copy]	 actionName:inActionName];
 	if (!undoManager.isUndoing) {
 		[undoManager setActionName:NSLocalizedString(inActionName, @"")];
 	}
@@ -299,7 +293,7 @@
 	[self updateLocalizableSet];
 
 	if (translatedContent && localizableInfoSet) {
-		JHLocalizableSettingParser *localizableSettingParser = [[[JHLocalizableSettingParser alloc] init] autorelease];
+		JHLocalizableSettingParser *localizableSettingParser = [[JHLocalizableSettingParser alloc] init];
 
 		NSArray *tempScanArray = nil;
 		NSSet *translatedMatchRecordSet = nil;

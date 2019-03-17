@@ -33,10 +33,10 @@
 
 @interface JHDocument : NSDocument <NSToolbarDelegate>
 {
-	IBOutlet JHFilePathTableViewController *filePathTableViewController;
-	IBOutlet JHMatchInfoTableViewController *matchInfoTableViewController;
-	IBOutlet NSSegmentedControl *segmentedControl;
-	IBOutlet NSSearchField *searchField;
+	IBOutlet JHFilePathTableViewController *__weak filePathTableViewController;
+	IBOutlet JHMatchInfoTableViewController *__weak matchInfoTableViewController;
+	IBOutlet NSSegmentedControl *__weak segmentedControl;
+	IBOutlet NSSearchField *__weak searchField;
 
 	JHMatchInfoProcessor *matchInfoProcessor;
 	NSArray *scanArray;
@@ -48,14 +48,14 @@
 - (IBAction)translate:(id)sender;
 - (IBAction)filterWithSearchType:(id)sender;
 
-@property (assign, nonatomic) IBOutlet JHFilePathTableViewController *filePathTableViewController;
-@property (assign, nonatomic) IBOutlet JHMatchInfoTableViewController *matchInfoTableViewController;
-@property (assign, nonatomic) IBOutlet NSSegmentedControl *segmentedControl;
-@property (assign, nonatomic) IBOutlet NSSearchField *searchField;
+@property (weak, nonatomic) IBOutlet JHFilePathTableViewController *filePathTableViewController;
+@property (weak, nonatomic) IBOutlet JHMatchInfoTableViewController *matchInfoTableViewController;
+@property (weak, nonatomic) IBOutlet NSSegmentedControl *segmentedControl;
+@property (weak, nonatomic) IBOutlet NSSearchField *searchField;
 
-@property (retain, nonatomic) JHMatchInfoProcessor *matchInfoProcessor;
-@property (retain, nonatomic) JHTranslatedWindowController *translatedWindowController;
-@property (retain, nonatomic) NSSet *localizableInfoSet;
-@property (retain, nonatomic) NSArray *scanArray;
+@property (strong, nonatomic) JHMatchInfoProcessor *matchInfoProcessor;
+@property (strong, nonatomic) JHTranslatedWindowController *translatedWindowController;
+@property (strong, nonatomic) NSSet *localizableInfoSet;
+@property (strong, nonatomic) NSArray *scanArray;
 
 @end

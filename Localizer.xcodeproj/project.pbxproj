@@ -7,30 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		39715A751637E4D80098BC0A /* ImageAndTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 39715A711637E4D80098BC0A /* ImageAndTextCell.m */; };
-		39715A761637E4D80098BC0A /* NSString+RelativePath.m in Sources */ = {isa = PBXBuildFile; fileRef = 39715A741637E4D80098BC0A /* NSString+RelativePath.m */; };
-		39715A8E1637E50A0098BC0A /* JHDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 39715A791637E50A0098BC0A /* JHDocument.m */; };
-		39715A8F1637E50A0098BC0A /* JHFilePathTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39715A7B1637E50A0098BC0A /* JHFilePathTableViewController.m */; };
-		39715A901637E50A0098BC0A /* JHLocalizableSettingParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 39715A7D1637E50A0098BC0A /* JHLocalizableSettingParser.m */; };
-		39715A921637E50A0098BC0A /* JHMatchInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 39715A811637E50A0098BC0A /* JHMatchInfo.m */; };
-		39715A931637E50A0098BC0A /* JHMatchInfoRecordColorTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 39715A831637E50A0098BC0A /* JHMatchInfoRecordColorTransformer.m */; };
-		39715A941637E50A0098BC0A /* JHMatchInfoTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 39715A851637E50A0098BC0A /* JHMatchInfoTableView.m */; };
-		39715A971637E50A0098BC0A /* JHScanFoldersTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 39715A8B1637E50A0098BC0A /* JHScanFoldersTableView.m */; };
-		39715A981637E50A0098BC0A /* JHSourceCodeParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 39715A8D1637E50A0098BC0A /* JHSourceCodeParser.m */; };
-		399C0686163A1C720076B5B4 /* JHMatchInfoProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 399C0685163A1C720076B5B4 /* JHMatchInfoProcessor.m */; };
-		399C06B7163A8D990076B5B4 /* JHPreferenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 399C06B6163A8D990076B5B4 /* JHPreferenceController.m */; };
+		39715A751637E4D80098BC0A /* ImageAndTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 39715A711637E4D80098BC0A /* ImageAndTextCell.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		39715A761637E4D80098BC0A /* NSString+RelativePath.m in Sources */ = {isa = PBXBuildFile; fileRef = 39715A741637E4D80098BC0A /* NSString+RelativePath.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		39715A8E1637E50A0098BC0A /* JHDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 39715A791637E50A0098BC0A /* JHDocument.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		39715A8F1637E50A0098BC0A /* JHFilePathTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39715A7B1637E50A0098BC0A /* JHFilePathTableViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		39715A901637E50A0098BC0A /* JHLocalizableSettingParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 39715A7D1637E50A0098BC0A /* JHLocalizableSettingParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		39715A921637E50A0098BC0A /* JHMatchInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 39715A811637E50A0098BC0A /* JHMatchInfo.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		39715A931637E50A0098BC0A /* JHMatchInfoRecordColorTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 39715A831637E50A0098BC0A /* JHMatchInfoRecordColorTransformer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		39715A941637E50A0098BC0A /* JHMatchInfoTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 39715A851637E50A0098BC0A /* JHMatchInfoTableView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		39715A971637E50A0098BC0A /* JHScanFoldersTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 39715A8B1637E50A0098BC0A /* JHScanFoldersTableView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		39715A981637E50A0098BC0A /* JHSourceCodeParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 39715A8D1637E50A0098BC0A /* JHSourceCodeParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		399C0686163A1C720076B5B4 /* JHMatchInfoProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 399C0685163A1C720076B5B4 /* JHMatchInfoProcessor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		399C06B7163A8D990076B5B4 /* JHPreferenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 399C06B6163A8D990076B5B4 /* JHPreferenceController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		399E1E941639405800E787B5 /* App.icns in Resources */ = {isa = PBXBuildFile; fileRef = 399E1E931639405800E787B5 /* App.icns */; };
-		39A5B97C16476060009904B0 /* JHTranslatedWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A5B97B16476060009904B0 /* JHTranslatedWindowController.m */; };
-		39DF7BBC163E6B6400558F99 /* JHMatchInfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39DF7BBB163E6B6400558F99 /* JHMatchInfoTableViewController.m */; };
+		39A5B97C16476060009904B0 /* JHTranslatedWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A5B97B16476060009904B0 /* JHTranslatedWindowController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		39DF7BBC163E6B6400558F99 /* JHMatchInfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39DF7BBB163E6B6400558F99 /* JHMatchInfoTableViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		39F25ADC1626A36900BAF9C9 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39F25ADB1626A36900BAF9C9 /* Cocoa.framework */; };
 		39F25AE61626A36900BAF9C9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 39F25AE41626A36900BAF9C9 /* InfoPlist.strings */; };
-		39F25AE81626A36900BAF9C9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 39F25AE71626A36900BAF9C9 /* main.m */; };
+		39F25AE81626A36900BAF9C9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 39F25AE71626A36900BAF9C9 /* main.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		39F25AEC1626A36900BAF9C9 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 39F25AEA1626A36900BAF9C9 /* Credits.rtf */; };
 		39F25AF21626A36900BAF9C9 /* JHDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39F25AF01626A36900BAF9C9 /* JHDocument.xib */; };
 		39F25AF51626A36A00BAF9C9 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39F25AF31626A36A00BAF9C9 /* MainMenu.xib */; };
 		39F25AFD1626A36A00BAF9C9 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39F25AFC1626A36A00BAF9C9 /* SenTestingKit.framework */; };
 		39F25AFE1626A36A00BAF9C9 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39F25ADB1626A36900BAF9C9 /* Cocoa.framework */; };
-		D45FC25416762FEA005D9BF7 /* JHAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D45FC25316762FE9005D9BF7 /* JHAppDelegate.m */; };
+		D45FC25416762FEA005D9BF7 /* JHAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D45FC25316762FE9005D9BF7 /* JHAppDelegate.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D45FC25916764BD9005D9BF7 /* Help in Resources */ = {isa = PBXBuildFile; fileRef = D45FC25716764BD9005D9BF7 /* Help */; };
 		D49A4D4E163848C900113ABE /* build.png in Resources */ = {isa = PBXBuildFile; fileRef = D49A4D4C163848C900113ABE /* build.png */; };
 		D49A4D4F163848C900113ABE /* folder.png in Resources */ = {isa = PBXBuildFile; fileRef = D49A4D4D163848C900113ABE /* folder.png */; };
@@ -598,6 +598,7 @@
 		39F25B0D1626A36A00BAF9C9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Localizer/Localizer-Prefix.pch";
@@ -611,6 +612,7 @@
 		39F25B0E1626A36A00BAF9C9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Localizer/Localizer-Prefix.pch";
