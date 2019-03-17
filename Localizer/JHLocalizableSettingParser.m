@@ -53,9 +53,9 @@
     }
     NSMutableArray *result = [NSMutableArray array];
     for (NSString *folderPath in [inFolderPaths componentsSeparatedByString:@","]) {
-        folderPath = [folderPath stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        if ([folderPath length]) {
-            NSURL *fileURL = [NSURL fileURLWithPath:folderPath];
+        NSString *trimmedPath = [folderPath stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        if ([trimmedPath length]) {
+            NSURL *fileURL = [NSURL fileURLWithPath:trimmedPath];
             [result addObject:fileURL];
         }
     }
@@ -112,7 +112,7 @@
             comment = @"";
         }
 
-        JHMatchInfo *matchInfo = [[[JHMatchInfo alloc] init] autorelease];
+        JHMatchInfo *matchInfo = [[JHMatchInfo alloc] init];
 
         [matchInfo setValue:key forKey:@"key"];
         [matchInfo setValue:translateString forKey:@"translateString"];

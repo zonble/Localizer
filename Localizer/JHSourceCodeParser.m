@@ -35,7 +35,7 @@ static NSSet *makeMatchInfoSet(NSString *pattern, NSString *fileContent, NSStrin
     NSError *matchError = nil;
     NSRegularExpression *regEx = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:&matchError];
     NSArray *matches = [regEx matchesInString:fileContent options:0 range:NSMakeRange(0, [fileContent length])];
-    NSMutableSet *result = [[[NSMutableSet alloc] init] autorelease];
+    NSMutableSet *result = [[NSMutableSet alloc] init];
 
     for (NSTextCheckingResult * i in matches) {
         NSString *key = [fileContent substringWithRange:[i rangeAtIndex:1]];
@@ -65,7 +65,7 @@ static NSSet *makeMatchInfoSet(NSString *pattern, NSString *fileContent, NSStrin
         matchInfo.comment = comment;
         matchInfo.filePath = filePath;
 
-        [result addObject:[matchInfo autorelease]];
+        [result addObject:matchInfo ];
     }
     return result;
 }
@@ -129,7 +129,7 @@ static NSSet *parseDir(NSString *baseFilePath, NSError **error)
         }
 
     }
-    return [result autorelease];
+    return result;
 }
 
 - (NSSet *)parse:(NSString *)filePath

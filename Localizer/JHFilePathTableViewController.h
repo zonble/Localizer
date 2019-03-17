@@ -26,14 +26,14 @@
 #import <Foundation/Foundation.h>
 
 @interface JHFilePathTableViewController : NSViewController <NSTableViewDelegate, NSTableViewDataSource>
-{
-    NSMutableArray *filePathArray;
-
-    //to be stored in localizable file
-    NSArray *relativeFilePathArray;
-
-    NSUndoManager *undoManager;
-}
+//{
+//    NSMutableArray *filePathArray;
+//
+//    //to be stored in localizable file
+//    NSArray *relativeFilePathArray;
+//
+//    NSUndoManager *undoManager;
+//}
 
 //增加原始碼路徑，動作完後會直接更新 table 上的資料
 - (void)addFilePaths:(NSArray *)inArray;
@@ -50,9 +50,9 @@
 //給定 index 的集合回傳該 index 集合所代表的物件
 - (NSArray *)filePathsAtIndexes:(NSIndexSet *)indexSet;
 
-@property (retain, nonatomic) NSArray *filePathArray;
-@property (retain, nonatomic) NSArray *relativeFilePathArray;
-@property (assign, nonatomic) NSUndoManager *undoManager;
+@property (retain, nonatomic) NSMutableArray *filePathArray;
+@property (retain, nonatomic) NSMutableArray *relativeFilePathArray;
+@property (weak, nonatomic) NSUndoManager *undoManager;
 @property (readonly, nonatomic) NSString *relativeSourceFilepahtsStringRepresentation;
 
 @end

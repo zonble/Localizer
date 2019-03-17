@@ -10,7 +10,7 @@
 
 - (void)awakeFromNib
 {
-    [[self window] setDefaultButtonCell:[mergeButton cell]];
+    [[self window] setDefaultButtonCell:[self.mergeButton cell]];
 }
 
 - (IBAction)mergeTranslatedString:(id)sender
@@ -22,11 +22,8 @@
 
 - (IBAction)close:(id)sender
 {
-    [NSApp endSheet:[self window]];
-    [[self window] orderOut:self];
+    [NSApp endSheet:self.window];
+    [self.window orderOut:self];
 }
-
-@synthesize translatedView, mergeButton, closeButton;
-@synthesize translatedWindowControllerDelegate;
 
 @end

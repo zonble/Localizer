@@ -28,22 +28,15 @@
 
 @implementation JHPreferenceController
 
-- (void)dealloc
-{
-    self.window = nil;
-    self.message = nil;
-    self.subMessage = nil;
-}
-
 - (IBAction)showPreference:(id)sender
 {
-    if (!window) {
+    if (!self.window) {
         [NSBundle loadNibNamed:@"JHPreference" owner:self];
-        message.stringValue = NSLocalizedString(@"Fill translate string automatically.", @"");
-        subMessage.stringValue = NSLocalizedString(@"localizer will fill untranslate string with key automatically.", @"");
+        self.message.stringValue = NSLocalizedString(@"Fill translate string automatically.", @"");
+        self.subMessage.stringValue = NSLocalizedString(@"localizer will fill untranslate string with key automatically.", @"");
     }
-    if (![window isVisible]) {
-        [window center];
+    if (![self.window isVisible]) {
+        [self.window center];
     }
     [self.window makeKeyAndOrderFront:sender];
 }
@@ -54,5 +47,4 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-@synthesize window, message, subMessage;
 @end

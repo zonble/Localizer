@@ -33,14 +33,14 @@
 
 @interface JHDocument : NSDocument <NSToolbarDelegate>
 {
-	IBOutlet JHFilePathTableViewController *__weak filePathTableViewController;
-	IBOutlet JHMatchInfoTableViewController *__weak matchInfoTableViewController;
-	IBOutlet NSSegmentedControl *__weak segmentedControl;
-	IBOutlet NSSearchField *__weak searchField;
-
-	JHMatchInfoProcessor *matchInfoProcessor;
-	NSArray *scanArray;
-	NSSet *localizableInfoSet;
+//	IBOutlet JHFilePathTableViewController *__weak filePathTableViewController;
+//	IBOutlet JHMatchInfoTableViewController *__weak matchInfoTableViewController;
+//	IBOutlet NSSegmentedControl *__weak segmentedControl;
+//	IBOutlet NSSearchField *__weak searchField;
+//
+//	JHMatchInfoProcessor *matchInfoProcessor;
+//	NSArray *scanArray;
+//	NSSet *localizableInfoSet;
 }
 
 - (IBAction)addScanFolderAndFiles:(id)sender;

@@ -32,7 +32,7 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)notification
 {
 	// Registering value transformers
-	JHMatchInfoRecordColorTransformer *transformer = [[[JHMatchInfoRecordColorTransformer alloc] init] autorelease];
+	JHMatchInfoRecordColorTransformer *transformer = [[JHMatchInfoRecordColorTransformer alloc] init];
 	[NSValueTransformer setValueTransformer:transformer forName:@"JHMatchInfoRecordColorTransformer"];
 
 	if (![[NSUserDefaults standardUserDefaults] objectForKey:JHAutoFillTranslationPreferenceKey]) {

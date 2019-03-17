@@ -32,8 +32,7 @@
 - (void)dealloc
 {
     [self stopObservingMatchInfoArray:[arrayController content]];
-    self.arrayController = nil;
-    [super dealloc];
+	self.arrayController = nil;
 }
 
 #pragma mark -  NSTableViewDelegate
@@ -81,7 +80,7 @@
 - (JHMatchInfo *)copiedMatchInfo:(JHMatchInfo *)inMatchInfo
 {
     if ([arrayController.content containsObject:inMatchInfo]) {
-        JHMatchInfo *matchInfo = [[[JHMatchInfo alloc] init] autorelease];
+        JHMatchInfo *matchInfo = [[JHMatchInfo alloc] init];
         matchInfo.key = [NSString stringWithFormat:@"%@ copy",inMatchInfo.key];
         matchInfo.translateString = inMatchInfo.translateString;
         matchInfo.comment = inMatchInfo.comment;
@@ -144,15 +143,15 @@
         }
     }
     [self willChangeValueForKey:@"translatedCountString"];
-    translatedCountString = [NSString stringWithFormat:@"%ld", translatedCount];
+    self.translatedCountString = [NSString stringWithFormat:@"%ld", translatedCount];
     [self didChangeValueForKey:@"translatedCountString"];
 
     [self willChangeValueForKey:@"unTranslatedCountString"];
-    unTranslatedCountString = [NSString stringWithFormat:@"%ld", unTranslatedCount];
+    self.unTranslatedCountString = [NSString stringWithFormat:@"%ld", unTranslatedCount];
     [self didChangeValueForKey:@"unTranslatedCountString"];
 
     [self willChangeValueForKey:@"notExistCountString"];
-    notExistCountString = [NSString stringWithFormat:@"%ld", notExistCount];
+    self.notExistCountString = [NSString stringWithFormat:@"%ld", notExistCount];
     [self didChangeValueForKey:@"notExistCountString"];
 }
 
@@ -162,7 +161,7 @@
     NSString *actionName = NSLocalizedString(@"Delete", @"");
     [self stopObservingMatchInfoArray:matchInfoArray];
 
-    [[undoManager prepareWithInvocationTarget:self] restoreMatchinfoArray:[[[arrayController content]copy]autorelease]  actionName:actionName];
+    [[undoManager prepareWithInvocationTarget:self] restoreMatchinfoArray:[[arrayController content]copy]  actionName:actionName];
     if (!undoManager.isUndoing) {
         [undoManager setActionName:actionName];
     }
@@ -177,7 +176,7 @@
     NSString *actionName = NSLocalizedString(@"Insert", @"");
     [self startObservingMatchInfoArray:matchInfoArray];
 
-    [[undoManager prepareWithInvocationTarget:self] restoreMatchinfoArray:[[[arrayController content]copy]autorelease]  actionName:actionName];
+    [[undoManager prepareWithInvocationTarget:self] restoreMatchinfoArray:[[arrayController content]copy]  actionName:actionName];
     if (!undoManager.isUndoing) {
         [undoManager setActionName:actionName];
     }
@@ -193,7 +192,7 @@
     [self updateCount:inArray];
     [self startObservingMatchInfoArray:inArray];
 
-    [[undoManager prepareWithInvocationTarget:self] restoreMatchinfoArray:[[[arrayController content]copy]autorelease]  actionName:inActionName];
+    [[undoManager prepareWithInvocationTarget:self] restoreMatchinfoArray:[[arrayController content]copy]  actionName:inActionName];
     if (!undoManager.isUndoing) {
         [undoManager setActionName:inActionName];
     }
@@ -226,7 +225,7 @@
 - (void)stopObservingMatchInfoArray:(NSArray *)inArray
 {
     //移除 observing
-    for (JHMatchInfo *matchInfo in [inArray retain]) {
+    for (JHMatchInfo *matchInfo in inArray) {
         [matchInfo removeObserver:self forKeyPath:@"translateString"];
         [matchInfo removeObserver:self forKeyPath:@"comment"];
     }
@@ -235,7 +234,7 @@
 - (void)startObservingMatchInfoArray:(NSArray *) inArray
 {
     //加上 KVO 準備 Undo 用
-    for (JHMatchInfo *matchInfo in [inArray retain]) {
+    for (JHMatchInfo *matchInfo in inArray ) {
         [matchInfo addObserver:self forKeyPath:@"translateString" options:NSKeyValueObservingOptionOld context:nil];
         [matchInfo addObserver:self forKeyPath:@"comment" options:NSKeyValueObservingOptionOld context:nil];
     }

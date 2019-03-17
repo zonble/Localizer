@@ -26,12 +26,6 @@
 #import <Foundation/Foundation.h>
 
 @interface JHPreferenceController : NSObject
-{
-    IBOutlet NSWindow *__weak window;
-    IBOutlet NSTextField *__weak message;
-    IBOutlet NSTextField *__weak subMessage;
-}
-
 - (IBAction)showPreference:(id)sender;
 - (IBAction)clickCheckbox:(id)sender;
 

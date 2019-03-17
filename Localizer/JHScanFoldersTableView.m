@@ -23,7 +23,7 @@
         [self setAllowsMultipleSelection: YES];
         
         for (int i = 0; i < [self.tableColumns count] ; i++) {
-            [(self.tableColumns)[i] setHeaderCell:[[[NSTableHeaderCell alloc] initTextCell:headerNameArray[i]] autorelease]];
+            [(self.tableColumns)[i] setHeaderCell:[[NSTableHeaderCell alloc] initTextCell:headerNameArray[i]]];
         }
     }
     return self;
@@ -73,7 +73,7 @@
 
 - (NSMenu *)menu
 {
-    NSMenu *menu = [[[NSMenu alloc] initWithTitle:NSLocalizedString(@"Context Menu", @"")] autorelease];
+    NSMenu *menu = [[NSMenu alloc] initWithTitle:NSLocalizedString(@"Context Menu", @"")] ;
     [menu addItemWithTitle:NSLocalizedString(@"Delete", @"") action:@selector(delete:) keyEquivalent:@""];
     [menu addItemWithTitle:NSLocalizedString(@"Open Folder in Finder", @"") action:@selector(openFileInFinder:) keyEquivalent:@""];
     return menu;

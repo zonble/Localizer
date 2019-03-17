@@ -35,7 +35,6 @@ NSString *const JHMatchInfoUTI = @"com.joehsieh.JHMatchInfo";
     self.translateString = nil;
     self.comment = nil;
     self.filePath = nil;
-    [super dealloc];
 }
 
 - (BOOL)isEqual:(id)object
@@ -140,10 +139,10 @@ NSString *const JHMatchInfoUTI = @"com.joehsieh.JHMatchInfo";
 {
     self = [super init];
     if (self) {
-        key = [[aDecoder decodeObjectForKey:@"kKey"] retain];
-        translateString = [[aDecoder decodeObjectForKey:@"kTranslateString"] retain];
-        comment = [[aDecoder decodeObjectForKey:@"kComment"] retain];
-        filePath = [[aDecoder decodeObjectForKey:@"kFilePath"] retain];
+        key = [aDecoder decodeObjectForKey:@"kKey"];
+        translateString = [aDecoder decodeObjectForKey:@"kTranslateString"];
+        comment = [aDecoder decodeObjectForKey:@"kComment"];
+        filePath = [aDecoder decodeObjectForKey:@"kFilePath"];
     }
 
     return self;

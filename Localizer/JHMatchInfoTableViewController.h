@@ -27,17 +27,17 @@
 #import "JHMatchInfoTableView.h"
 
 @interface JHMatchInfoTableViewController : NSObject<NSTableViewDelegate, NSTableViewDelegateMatchInfoExtension>
-{
-    // table view data
-    IBOutlet NSArrayController *arrayController;
-    NSUndoManager *undoManager;
-
-    // for update every type count of top tool bar
-    NSString *translatedCountString;
-    NSString *unTranslatedCountString;
-    NSString *notExistCountString;
-
-}
+//{
+//    // table view data
+//    IBOutlet NSArrayController *arrayController;
+//    NSUndoManager *undoManager;
+//
+//    // for update every type count of top tool bar
+//    NSString *translatedCountString;
+//    NSString *unTranslatedCountString;
+//    NSString *notExistCountString;
+//
+//}
 //指定新的 matchInfo record 並重新載入，動作完後會直接更新 table 上的資料
 - (void)reloadMatchInfoRecords:(NSArray *)inArray;
 
@@ -56,5 +56,9 @@
 @property (retain, nonatomic) IBOutlet NSArrayController *arrayController;
 @property (readonly, nonatomic) NSArray *matchInfoArray;
 @property (assign , nonatomic) NSUndoManager *undoManager;
+
+@property (retain, nonatomic) NSString *translatedCountString;
+@property (retain, nonatomic) NSString *unTranslatedCountString;
+@property (retain, nonatomic) NSString *notExistCountString;
 
 @end

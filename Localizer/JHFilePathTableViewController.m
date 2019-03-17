@@ -26,6 +26,7 @@
 #import "JHFilePathTableViewController.h"
 #import "NSString+RelativePath.h"
 
+
 @interface JHFilePathTableViewController(Privates)
 - (void)restoreFilePathArray:(NSArray *)inArray actionName:(NSString *)inActionName;
 - (NSArray *)translateRelativePathToAbsolutePath:(NSArray *)inArray withBasePath:(NSString *)inBasePath;
@@ -36,11 +37,11 @@
 
 - (void)restoreFilePathArray:(NSArray *)inArray actionName:(NSString *)inActionName
 {
-    [[undoManager prepareWithInvocationTarget:self] restoreFilePathArray:[[filePathArray copy] autorelease]  actionName:inActionName];
-    if (!undoManager.isUndoing) {
-        [undoManager setActionName:NSLocalizedString(inActionName, @"")];
+    [[self.undoManager prepareWithInvocationTarget:self] restoreFilePathArray:[self.filePathArray copy]  actionName:inActionName];
+    if (!self.undoManager.isUndoing) {
+        [self.undoManager setActionName:NSLocalizedString(inActionName, @"")];
     }
-    [filePathArray setArray:inArray];
+    [self.filePathArray setArray:inArray];
     [self reloadSourceFilePaths];
 }
 
@@ -80,15 +81,14 @@
 {
     self.filePathArray = nil;
     self.relativeFilePathArray = nil;
-    [super dealloc];
 }
 
 - (instancetype)init
 {
     self = [super init];
     if (self) {
-        if (!filePathArray) {
-			filePathArray = [[NSMutableArray alloc] init];
+        if (!self.filePathArray) {
+			self.filePathArray = [[NSMutableArray alloc] init];
         }
     }
     return self;
@@ -101,7 +101,7 @@
     NSTableView *tableView = (NSTableView *)self.view;
     NSTableColumn *column = [tableView tableColumnWithIdentifier:@"path"];
     [column setEditable:NO];
-    NSBrowserCell *cell = [[[NSBrowserCell alloc] init] autorelease];
+    NSBrowserCell *cell = [[NSBrowserCell alloc] init];
     [column setDataCell:cell];
 }
 
@@ -109,7 +109,7 @@
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
-    return [filePathArray count];
+    return [self.filePathArray count];
 }
 - (void)tableView:(NSTableView *)tableView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
@@ -129,7 +129,7 @@
 
 - (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
-    return [filePathArray[row] path];
+    return [self.filePathArray[row] path];
 }
 
 - (BOOL)tableView:(NSTableView *)aTableView acceptDrop:(id<NSDraggingInfo>)info row:(NSInteger)row dropOperation:(NSTableViewDropOperation)dropOperation
@@ -152,7 +152,7 @@
             break;
         }
     }
-    [filePathArray addObjectsFromArray:resultArray];
+    [self.filePathArray addObjectsFromArray:resultArray];
 
     [(NSTableView *)self.view reloadData];
     return YES;
@@ -166,17 +166,16 @@
 #pragma mark -  NSTableViewDelegateScanFolderExtension
 - (void)tableView:(NSTableView *)inTableView didDeleteScanFoldersWithIndexes:(NSIndexSet *)inIndexes
 {
-    [self removeFilePaths:[filePathArray objectsAtIndexes:inIndexes]];
+    [self removeFilePaths:[self.filePathArray objectsAtIndexes:inIndexes]];
 }
 
 - (void)tableView:(NSTableView *)inTableView didOpenScanFoldersWithIndexes:(NSIndexSet *)inIndexes
 {
     [inIndexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
         NSDictionary* errors = @{};
-		NSString *scriptString = [NSString stringWithFormat:@"tell application \"Finder\" \n activate\n open (\"%@\" as POSIX file) \n end tell",filePathArray[idx]];
+		NSString *scriptString = [NSString stringWithFormat:@"tell application \"Finder\" \n activate\n open (\"%@\" as POSIX file) \n end tell",self.filePathArray[idx]];
         NSAppleScript* appleScript = [[NSAppleScript alloc] initWithSource:scriptString];
         [appleScript executeAndReturnError:&errors];
-        [appleScript release];
     }];
 }
 
@@ -185,24 +184,24 @@
 - (void)addFilePaths:(NSArray *)inArray
 {
     NSString *actionName = NSLocalizedString(@"Add Src Path", @"");
-    [[undoManager prepareWithInvocationTarget:self] restoreFilePathArray:[[filePathArray copy] autorelease]  actionName:actionName];
-    if (!undoManager.isUndoing) {
-        [undoManager setActionName:actionName];
+    [[self.undoManager prepareWithInvocationTarget:self] restoreFilePathArray:[self.filePathArray copy]  actionName:actionName];
+    if (!self.undoManager.isUndoing) {
+        [self.undoManager setActionName:actionName];
     }
 	[self willChangeValueForKey:@"filePathArray"];
-    [filePathArray addObjectsFromArray:inArray];
+    [self.filePathArray addObjectsFromArray:inArray];
     [self didChangeValueForKey:@"filePathArray"];
     [self reloadSourceFilePaths];
 }
 - (void)removeFilePaths:(NSArray *)inArray
 {
     NSString *actionName = NSLocalizedString(@"Remove Src Path", @"");
-    [[undoManager prepareWithInvocationTarget:self] restoreFilePathArray:[[filePathArray copy] autorelease] actionName:actionName];
-    if (!undoManager.isUndoing) {
-        [undoManager setActionName:actionName];
+    [[self.undoManager prepareWithInvocationTarget:self] restoreFilePathArray:[self.filePathArray copy]  actionName:actionName];
+    if (!self.undoManager.isUndoing) {
+        [self.undoManager setActionName:actionName];
     }
 	[self willChangeValueForKey:@"filePathArray"];
-    [filePathArray removeObjectsInArray:inArray];
+    [self.filePathArray removeObjectsInArray:inArray];
     [self didChangeValueForKey:@"filePathArray"];
     [self reloadSourceFilePaths];
 }
@@ -210,7 +209,7 @@
 - (void)setSourceFilePaths:(NSArray *)inArray withBaseURL:(NSURL *)baseURL
 {
 	[self willChangeValueForKey:@"filePathArray"];
-	[filePathArray setArray:[self translateRelativePathToAbsolutePath:inArray withBasePath:[baseURL path]]];
+	[self.filePathArray setArray:[self translateRelativePathToAbsolutePath:inArray withBasePath:[baseURL path]]];
     [self didChangeValueForKey:@"filePathArray"];
     [self reloadSourceFilePaths];
 }
@@ -219,19 +218,19 @@
 
 - (void)updateRelativeFilePathArrayWithNewBaseURL:(NSURL *)baseURL
 {
-    if (![filePathArray count]) {
-        relativeFilePathArray = [[NSArray alloc] init];
+    if (![self.filePathArray count]) {
+        self.relativeFilePathArray = [[NSArray alloc] init];
         return;
     }
     if (![baseURL path]) {
         //如果沒有基礎的路徑可以轉換出相對路徑，就回傳絕對路徑
-        relativeFilePathArray = filePathArray;
+        self.relativeFilePathArray = self.filePathArray;
     }
     NSMutableArray *result = [[NSMutableArray alloc] init];
-    for (NSURL *i in filePathArray) {
+    for (NSURL *i in self.filePathArray) {
         [result addObject:[NSURL URLWithString:[[i.relativePath relativePathFromBaseDirPath:[baseURL path]] stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]]];
     }
-    relativeFilePathArray = result;
+    self.relativeFilePathArray = result;
 }
 
 #pragma mark -  others
@@ -246,14 +245,13 @@
 {
     NSMutableString *resultString = [NSMutableString string];
     [resultString appendString:@"/*\nScan List\n"];
-    for (NSURL *fileURL in relativeFilePathArray) {
-        [resultString appendFormat:@"%@%@\n", [fileURL path], fileURL == [relativeFilePathArray lastObject] ? @"": @","];
+    for (NSURL *fileURL in self.relativeFilePathArray) {
+        [resultString appendFormat:@"%@%@\n", [fileURL path], fileURL == [self.relativeFilePathArray lastObject] ? @"": @","];
     }
     [resultString appendString:@"*/\n"];
 
     return resultString;
 }
 
-@synthesize filePathArray, relativeFilePathArray;
-@synthesize undoManager;
+
 @end
