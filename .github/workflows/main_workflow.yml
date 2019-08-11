@@ -1,0 +1,13 @@
+name: Build
+# This workflow is triggered on pushes to the repository.
+on: [push]
+
+jobs:
+  build:
+    # Job name is Greeting
+    name: Build
+    # This job runs on Linux
+    runs-on: macOS-latest
+    steps:
+    - uses: actions/action-builder/shell@master
+    - run: xcodebuild
